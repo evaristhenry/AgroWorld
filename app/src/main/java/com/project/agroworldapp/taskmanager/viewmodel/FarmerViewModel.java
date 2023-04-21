@@ -19,11 +19,10 @@ public class FarmerViewModel extends AndroidViewModel {
         super(application);
         repository = new DatabaseRepository(application);
         farmerRoutines = repository.getFarmerRoutines();
-        LiveData<Integer> maxIDCount = repository.getMaxIdCount();
     }
 
-    public void insert(FarmerModel model) {
-        repository.insert(model);
+    public long insert(FarmerModel model) {
+       return repository.insert(model);
     }
 
     public void delete(FarmerModel model) {
@@ -38,7 +37,7 @@ public class FarmerViewModel extends AndroidViewModel {
         return farmerRoutines;
     }
 
-    public LiveData<Integer> getMaxIDCount() {
-        return repository.getMaxIdCount();
-    }
+//    public LiveData<Integer> getMaxIDCount() {
+//        return repository.getMaxIdCount();
+//    }
 }

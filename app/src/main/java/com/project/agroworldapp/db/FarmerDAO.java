@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -13,8 +14,8 @@ import java.util.List;
 @Dao
 public interface FarmerDAO {
 
-    @Insert
-    void insert(FarmerModel model);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(FarmerModel model);
 
     @Update
     void update(FarmerModel model);
@@ -28,8 +29,8 @@ public interface FarmerDAO {
     @Query("SELECT * FROM farmer_table ORDER BY id DESC")
     LiveData<List<FarmerModel>> getFarmerRoutines();
 
-    @Query("SELECT MAX(id) FROM farmer_table")
-    LiveData<Integer> getMaxCount();
-
+//    @Query("SELECT MAX(id) FROM farmer_table")
+//    @Query(" SELECT MAX(id) FROM (SELECT id FROM farmer_table)")
+//    LiveData<Integer> getMaxCount();
 
 }

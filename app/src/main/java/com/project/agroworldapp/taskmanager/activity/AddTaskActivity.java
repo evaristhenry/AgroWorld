@@ -27,7 +27,6 @@ import java.util.Calendar;
 
 public class AddTaskActivity extends AppCompatActivity {
     String timeToNotify;
-    int maxIDCount;
     private ActivityAddTaskBinding binding;
     private FarmerViewModel viewModel;
     private TimeModel timeModel;
@@ -38,7 +37,6 @@ public class AddTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_task);
         Intent intent = getIntent();
-        maxIDCount = intent.getIntExtra("maxIDCount", maxIDCount);
         viewModel = new ViewModelProvider(this).get(FarmerViewModel.class);
         binding.ivSelectTime.setOnClickListener(v -> showTimerPickerDialog());
         binding.ivSelectDate.setOnClickListener(v -> showDatePickerDialog());
@@ -82,8 +80,8 @@ public class AddTaskActivity extends AppCompatActivity {
             farmerModel.setDesc(desc);
             farmerModel.setDate(date);
             farmerModel.setTime(time);
-            viewModel.insert(farmerModel);
-            setTaskRemainder(task, desc);
+            long maxIDCount = viewModel.insert(farmerModel);
+            setTaskRemainder(task, desc, (int) maxIDCount + 1);
             Constants.showToast(AddTaskActivity.this, getString(R.string.routine_added));
             finish();
         });
@@ -110,7 +108,7 @@ public class AddTaskActivity extends AppCompatActivity {
         return time;
     }
 
-    private void setTaskRemainder(String task, String desc) {
+    private void setTaskRemainder(String task, String desc, int maxIDCount) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, dateModel.getYear());
         calendar.set(Calendar.MONTH, dateModel.getMonth() - 1);

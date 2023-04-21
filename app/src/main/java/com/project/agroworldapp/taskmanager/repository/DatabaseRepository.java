@@ -12,6 +12,7 @@ import com.project.agroworldapp.db.FarmerModel;
 import java.util.List;
 
 public class DatabaseRepository {
+    static long maxIDCount;
     private final FarmerDAO dao;
     private final LiveData<List<FarmerModel>> farmerRoutines;
 
@@ -19,11 +20,11 @@ public class DatabaseRepository {
         FarmerDatabase database = FarmerDatabase.getInstance(application);
         dao = database.taskDao();
         farmerRoutines = dao.getFarmerRoutines();
-        LiveData<Integer> maxIdCount = dao.getMaxCount();
     }
 
-    public void insert(FarmerModel model) {
+    public long insert(FarmerModel model) {
         new InsertRoutineAsyncTask(dao).execute(model);
+        return maxIDCount;
     }
 
     public void update(FarmerModel model) {
@@ -42,11 +43,11 @@ public class DatabaseRepository {
         return farmerRoutines;
     }
 
-    public LiveData<Integer> getMaxIdCount() {
-        return dao.getMaxCount();
-    }
+//    public LiveData<Integer> getMaxIdCount() {
+//        return dao.getMaxCount();
+//    }
 
-    private static class InsertRoutineAsyncTask extends AsyncTask<FarmerModel, Void, Void> {
+    private static class InsertRoutineAsyncTask extends AsyncTask<FarmerModel, Void, Long> {
         private final FarmerDAO dao;
 
         private InsertRoutineAsyncTask(FarmerDAO dao) {
@@ -54,10 +55,14 @@ public class DatabaseRepository {
         }
 
         @Override
-        protected Void doInBackground(FarmerModel... model) {
+        protected Long doInBackground(FarmerModel... model) {
             // below line is use to insert our modal in dao.
-            dao.insert(model[0]);
-            return null;
+            return dao.insert(model[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Long integer) {
+            maxIDCount = integer;
         }
     }
 

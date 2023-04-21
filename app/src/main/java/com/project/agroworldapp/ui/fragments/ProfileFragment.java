@@ -61,12 +61,12 @@ public class ProfileFragment extends Fragment implements OnItemClickListener {
     @Override
     public void onStart() {
         super.onStart();
-        viewModel.getMaxIDCount().observe(getViewLifecycleOwner(), integer -> {
-            if (integer != null) {
-                maxIDCount = integer;
-                printLog("taskMaxID-ViewModel " + maxIDCount);
-            }
-        });
+//        viewModel.getMaxIDCount().observe(getViewLifecycleOwner(), integer -> {
+//            if (integer != null) {
+//                maxIDCount = integer;
+//                printLog("taskMaxID-ViewModel " + maxIDCount);
+//            }
+//        });
     }
 
     @Override
@@ -200,14 +200,14 @@ public class ProfileFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void markTaskCompleted(FarmerModel model) {
-        deactivateAlarm(model.getId());
+        deactivateAlarm((int) model.getId());
         viewModel.delete(model);
         Constants.showToast(requireContext(), getString(R.string.task_completed));
     }
 
     @Override
     public void onDeleteClick(FarmerModel model) {
-        deactivateAlarm(model.getId());
+        deactivateAlarm((int) model.getId());
         viewModel.delete(model);
         Constants.showToast(requireContext(), getString(R.string.task_deleted));
     }
