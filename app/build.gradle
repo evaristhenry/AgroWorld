@@ -12,8 +12,8 @@ android {
         applicationId "com.project.agroworldapp"
         minSdk 21
         targetSdk 32
-        versionCode 6
-        versionName "3.0.6"
+        versionCode 7
+        versionName "3.0.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "RAZORPAY_KEY_ID", RAZORPAY_KEY_ID

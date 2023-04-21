@@ -43,10 +43,6 @@ public class DatabaseRepository {
         return farmerRoutines;
     }
 
-//    public LiveData<Integer> getMaxIdCount() {
-//        return dao.getMaxCount();
-//    }
-
     private static class InsertRoutineAsyncTask extends AsyncTask<FarmerModel, Void, Long> {
         private final FarmerDAO dao;
 
