@@ -94,14 +94,14 @@
                                 android:id="@+id/tvWeatherTemp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/tvWeatherCity"
+                                android:layout_above="@id/tvWeatherDate"
                                 android:layout_toStartOf="@id/layoutWeatherDT"
                                 android:layout_toEndOf="@id/ivWeatherIconHome"
                                 android:fontFamily="@font/days_one"
                                 android:gravity="center"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="40sp"
+                                android:textSize="35sp"
                                 android:textStyle="bold" />
 
 
@@ -110,14 +110,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
-                                android:layout_marginBottom="@dimen/dp_10"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                android:lines="1"
                                 android:layout_toStartOf="@id/layoutWeatherDT"
                                 android:layout_toEndOf="@id/ivWeatherIconHome"
                                 android:fontFamily="@font/fredoka_one"
                                 android:gravity="center"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="14sp" />
+                                android:textSize="13sp" />
 
                             <TextView
                                 android:id="@+id/tvWeatherCity"
